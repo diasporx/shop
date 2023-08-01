@@ -6,7 +6,7 @@
           <router-link to="/"><img alt="logo" src='@/assets/logo.svg'></router-link>
         </div>
         <div class="like d-flex align-items-center">
-          <router-link to="/about"><img alt="logo" src='@/assets/like.svg'></router-link>
+          <router-link to="/favorites"><img alt="logo" src='@/assets/like.svg'></router-link>
         </div>
       </div>
     </div>
