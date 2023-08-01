@@ -16,7 +16,8 @@
 <style scoped lang="scss">
 .header {
   width: 100%;
-  padding: 11px;
+  padding: 11px 0 19.5px;
+  border-bottom: 1px solid #0A1E32;
 }
 </style>
 
