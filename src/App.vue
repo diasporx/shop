@@ -1,13 +1,15 @@
 <template>
   <Header/>
   <router-view/>
+  <Footer/>
 </template>
 <script>
 import {mapActions} from "vuex";
 import Header from '@/components/__include/Header.vue'
+import Footer from "@/components/__include/Footer.vue";
 
 export default {
-  components: {Header},
+  components: {Footer, Header},
   created() {
     this.fetchProducts();
   },
@@ -49,7 +51,20 @@ h1 {
   font-weight: 500;
   font-size: 40px;
   line-height: 48px;
-  color: #0A1E32;
+  color: #232E42;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #232E42;
+}
+h3 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #232E42;
 }
 
 a {
@@ -73,6 +88,9 @@ a:hover {
 
 .d-flex {
   display: flex;
+}
+.d-block {
+  display: block;
 }
 
 .justify-content-between {

@@ -2,13 +2,12 @@
   <div class="content">
     <div class="banner"></div>
     <div class="container">
-      <Products/>
+      <Products />
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 import Products from "@/components/Products.vue";
 export default {
   name: 'HomeView',

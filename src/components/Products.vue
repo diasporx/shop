@@ -1,39 +1,43 @@
 <template>
   <div class="blocks-products">
-
-    <div class="card d-flex f-col" v-for="product in products" :key="product.id">
-      <img :src="`${product.image}`">
-      <div class="description d-flex f-col">
-        <p>{{ product.title }}</p>
-        <span>{{ product.price }} $</span>
+    <div class="card d-flex f-col" v-for="item in items" :key="item.id">
+      <div class="img-card-container">
+        <img class="image-product" :src="`${item.image}`">
       </div>
-      <LikeButton :isProductLiked="isProductLiked(product.id)" :favoriteProduct="product" />
-<!--      <button><img src='@/assets/like-line.svg' alt="like"></button>-->
+      <div class="description d-flex f-col">
+        <p>{{ item.title }}</p>
+        <span>{{ item.price }} $</span>
+      </div>
+      <LikeButton :isProductLiked="isItemLiked(item.id)" :favoriteProduct="item" :icontwo="btnHoverValue"/>
+      <router-link class="link-in-product" :to="{ name: 'product-detail', params: { id: item.id } }"></router-link>
     </div>
-
   </div>
 </template>
-<script>
-import {mapState, useStore} from "vuex";
-import LikeButton from "@/components/__include/LikeButton.vue";
-export default {
 
-  components:{LikeButton},
+<script>
+import { mapState } from 'vuex';
+import LikeButton from '@/components/__include/LikeButton.vue';
+
+export default {
+  props: {
+    direction: Array,
+  },
+  components: { LikeButton },
   computed: {
-    ...mapState(['products']),
-    products() {
-      return this.$store.state.products;
+    ...mapState(['products', 'favorites']),
+    items() {
+      return this.$route.name === 'favorites' ? this.favorites : this.products;
     },
-    favorites() {
-      return this.$store.state.favorites;
+    btnHoverValue() {
+      return this.$route.name === 'favorites' ? require('@/assets/close.svg') : require('@/assets/like.svg');
     }
   },
   methods: {
-    isProductLiked(productId) {
-      return this.favorites.some((product) => product.id === productId);
-    }
-  }
-}
+    isItemLiked(itemId) {
+      return this.favorites.some((item) => item.id === itemId);
+    },
+  },
+};
 </script>
 <style lang="scss">
 .blocks-products {
@@ -47,25 +51,47 @@ export default {
   @media screen and (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
   }
+
   .card {
+    transition: all .3s ease;
     position: relative;
+    a.link-in-product {
+      position: absolute;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
     button {
       background: transparent;
+      z-index: 3;
       position: absolute;
       top: 10px;
       right: 10px;
       border: none;
+
       img {
         width: 24px;
         height: 22px;
       }
     }
+
     button:hover {
       cursor: pointer;
     }
-    img {
-      width: 320px;
+
+    .img-card-container {
       height: 336px;
+      overflow: hidden;
+      width: 320px;
+      display: flex;
+      align-items: center;
+      img.image-product {
+        padding: 25px;
+        width: 100%;
+      }
     }
 
     .description {
@@ -92,6 +118,10 @@ export default {
         width: 100%;
       }
     }
+  }
+
+  .card:hover {
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.15);
   }
 }
 </style>

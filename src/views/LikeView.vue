@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content favorites">
     <div class="container">
       <BreadCrumbs/>
       <h1>Избранное</h1>
@@ -15,3 +15,8 @@ export default {
   components: {FavoritesList, BreadCrumbs}
 }
 </script>
+<style>
+.favorites {
+  min-height: 100vh;
+}
+</style>
